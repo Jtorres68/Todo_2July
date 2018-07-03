@@ -1,0 +1,27 @@
+<section class="todoapp">
+  <header class="header">
+    <h1>Todos</h1>
+    <input class="new-todo" placeholder="What needs to be done?" autofocus="" [(ngModel)]="newTodo.title" (keyup.enter)="addTodo()">
+  </header>
+  <section class="main" *ngIf="todos.length > 0">
+    <ul class="todo-list">
+      <li *ngFor="let todo of todos" [class.completed]="todo.complete" [ngClass]="{editing: todo.editing}">
+        <div class="view">
+          <input class="toggle" type="checkbox" (click)="toggleTodoComplete(todo)" [checked]="todo.complete">
+          <label (dblclick)="todo.editing = true">{{todo.title}}</label>
+          <button class="destroy" (click)="removeTodo(todo)"></button>
+        </div>
+          <input class="edit"
+         #updatedTodo
+         [value]="todo.title"
+         (blur)="updateTodo(todo, updatedTodo.value)"
+         (keyup.escape)="todo.editing = false"
+         (keyup.enter)="updateTodo(todo, updatedTodo.value)">
+          <!--<input class="edit" #updatedTodo [value]="todo.title" (blur)="updateTodo(todo, updateTodo.value)" (keyup.enter)="updateTodo(todo, updateTodo.value)"> -->
+      </li>
+    </ul>
+  </section>
+  <footer class="footer" *ngIf="todos.length > 0">
+    <span class="todo-count"><strong>{{todos.length}}</strong> {{todos.length == 1 ? 'item' : 'items'}} left</span>
+  </footer>
+</section>
