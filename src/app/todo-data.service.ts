@@ -12,6 +12,8 @@ export class TodoDataService {
   todos: Todo[] = [];
 
   constructor() {
+    let todos = this.getAllTodos();
+  
   }
 
   // Simulate POST /todos
@@ -42,7 +44,8 @@ export class TodoDataService {
 
   // Simulate GET /todos
   getAllTodos(): Todo[] {
-    return this.todos;
+    let localStorageItem = JSON.parse(localStorage.getItem('todos'));
+    return localStorageItem == null ? [] : localStorageItem.todos;
   }
 
   // Simulate GET /todos/:id
@@ -68,4 +71,8 @@ export class TodoDataService {
   });
 }
 
+
+  private setLocalStorageTodos(todos: Todo[]): void {
+    localStorage.setItem('todos', JSON.stringify({ todos: todos }));
+  }
 }

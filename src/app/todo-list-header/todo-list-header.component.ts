@@ -9,6 +9,8 @@ import { Todo } from '../todo';
 export class TodoListHeaderComponent {
 
   newTodo: Todo = new Todo();
+  
+  
 
   @Output()
   add: EventEmitter<Todo> = new EventEmitter();
