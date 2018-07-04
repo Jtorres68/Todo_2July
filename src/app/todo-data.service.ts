@@ -9,11 +9,11 @@ export class TodoDataService {
   lastId: number = 0;
 
   // Placeholder for todos
-  todos: Todo[] = [];
+  
 
   constructor() {
     let todos = this.getAllTodos();
-  
+
   }
 
   // Simulate POST /todos
@@ -21,14 +21,19 @@ export class TodoDataService {
     if (!todo.id) {
       todo.id = ++this.lastId;
     }
-    this.todos.push(todo);
+    let todos = this.getAllTodos();
+    todos.push(todo);
+    
+    this.setLocalStorageTodos(todos);
     return this;
   }
 
   // Simulate DELETE /todos/:id
   deleteTodoById(id: number): TodoDataService {
-    this.todos = this.todos
+    let todos = this.getAllTodos();
+    todos = todos
       .filter(todo => todo.id !== id);
+    this.setLocalStorageTodos(todos);
     return this;
   }
 
@@ -50,7 +55,8 @@ export class TodoDataService {
 
   // Simulate GET /todos/:id
   getTodoById(id: number): Todo {
-    return this.todos
+    let todos = this.getAllTodos();
+    return todos
       .filter(todo => todo.id === id)
       .pop();
   }
@@ -64,9 +70,10 @@ export class TodoDataService {
   }
   
   put(data) {
+  let todos = this.getAllTodos();
   return new Promise(resolve => {
-    let index = this.todos.findIndex(todo => todo.id === data.id);
-    this.todos[index].title = data.title;
+    let index = todos.findIndex(todo => todo.id === data.id);
+    todos[index].title = data.title;
     resolve(data);
   });
 }
