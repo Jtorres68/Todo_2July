@@ -79,6 +79,7 @@ export class TodoDataService {
    return updatedTodo;
   }
   
+//Grab the index of the todo and update Todo list (worked before local storage)  
 put(data) {
 let todos = this.getAllTodos();
   return new Promise(resolve => {

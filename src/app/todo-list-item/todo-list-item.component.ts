@@ -29,6 +29,8 @@ export class TodoListItemComponent {
     this.remove.emit(todo);
   }
    
+   
+//edit li string (worked before local storage)   
 updateTodo(todo, newValue) {
   todo.title = newValue;
   return this.todoDataService.put(todo).then(() => {
