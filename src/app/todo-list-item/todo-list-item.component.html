@@ -1,9 +1,10 @@
 <div class="view">
     
-        <input class="toggle" type="checkbox" (click)="toggleTodoComplete(todo)" [checked]="todo.complete">
-        <label (dblclick)="todo.editing = true">{{todo.title}}</label>
-        <label>{{todo.date}}</label>
-        <label>{{todo.time}}</label>
+        <tr>
+            <td><input class="toggle" type="checkbox" (dbclick)="toggleTodoComplete(todo)" [checked]="todo.complete">
+                <label (dblclick)="todo.editing = true">{{todo.title}}</label></td>
+            <td><label>{{todo.date}}</label></td>
+            <td><label>{{todo.time}}</label></td></tr>
     <button class="destroy" (click)="removeTodo(todo)"></button>
 </div>
 <input class="edit"

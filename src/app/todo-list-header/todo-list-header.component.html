@@ -1,8 +1,9 @@
   <header class="header">
-    <h1>Todos</h1>
-    <input class="new-todo" placeholder="What needs to be done?" autofocus="" [(ngModel)]="newTodo.title" (keyup.enter)="addTodo()">
-    <input type="date" class="new-todo" id="appt" name="appt" value="" min="2018-06-07" max="2099-12-31" [(ngModel)]="newTodo.date" (keyup.enter)="addTodo()"/>
-    <input type="time" class="new-todo" id="appt" name="appt" value="" min="00:00" [(ngModel)]="newTodo.time" (keyup.enter)="addTodo()"/>
+    <h1>Scheduled Appointments</h1>
+    <h2>(Clients)</h2>
+      <input class="new-todo" placeholder="Name of Client" autofocus="" [(ngModel)]="newTodo.title" (keyup.enter)="addTodo()">
+          <tr><td><input type="date" class="new-todo" autofocus="" id="appt" name="appt" value="" min="2018-06-07" max="2099-12-31" [(ngModel)]="newTodo.date" (keyup.enter)="addTodo()"/></td>
+          <td><input type="time" class="new-todo" autofocus="" id="appt" name="appt" value="" min="00:00" [(ngModel)]="newTodo.time" (keyup.enter)="addTodo()"/></td></tr>
   </header>
 
 

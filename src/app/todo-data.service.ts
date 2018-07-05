@@ -10,14 +10,14 @@ export class TodoDataService {
 
   // Placeholder for todos
   public data: Array<any> =[];
-  todos: Todo[] = [];
 
   constructor() {
+    let todos = this.getAllTodos();
     
-    if (this.todos.length == 0) {
+    if (todos.length == 0) {
       this.lastId = 0;
     } else {
-      let maxId = this.todos[this.todos.length-1].id;
+      let maxId = todos[todos.length-1].id;
       this.lastId = maxId + 1;
     }
   }
@@ -64,7 +64,8 @@ export class TodoDataService {
 
   // Simulate GET /todos/:id
   getTodoById(id: number): Todo {
-  return this.todos
+  let todos = this.getAllTodos();
+  return todos
      .filter(todo => todo.id === id)
      .pop();
       
@@ -79,9 +80,10 @@ export class TodoDataService {
   }
   
 put(data) {
+let todos = this.getAllTodos();
   return new Promise(resolve => {
-    let index = this.todos.findIndex(todo => todo.id === data.id);
-    this.todos[index].title = data.title;
+    let index = todos.findIndex(todo => todo.id === data.id);
+    todos[index].title = data.title;
     resolve(data);
   });
 }
