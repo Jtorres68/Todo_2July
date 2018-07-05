@@ -1,6 +1,6 @@
 <section class="main" *ngIf="todos.length > 0">
     <ul class="todo-list">
-      <li *ngFor="let todo of todos" [class.completed]="todo.complete" [ngClass]="{editing: todo.editing}">
+      <li *ngFor="let todo of todos; let i = index" [class.completed]="todo.complete" [ngClass]="{editing: todo.editing}">
         <app-todo-list-item
         [todo]="todo"
         (toggleComplete)="onToggleTodoComplete($event)"

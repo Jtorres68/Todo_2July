@@ -6,14 +6,20 @@ export class TodoDataService {
 
   // Placeholder for last id so we can simulate
   // automatic incrementing of ids
-  lastId: number = 0;
+  lastId: number;
 
   // Placeholder for todos
-  
+  public data: Array<any> =[];
+  todos: Todo[] = [];
 
   constructor() {
-    let todos = this.getAllTodos();
-
+    
+    if (this.todos.length == 0) {
+      this.lastId = 0;
+    } else {
+      let maxId = this.todos[this.todos.length-1].id;
+      this.lastId = maxId + 1;
+    }
   }
 
   // Simulate POST /todos
@@ -21,6 +27,7 @@ export class TodoDataService {
     if (!todo.id) {
       todo.id = ++this.lastId;
     }
+    
     let todos = this.getAllTodos();
     todos.push(todo);
     
@@ -29,20 +36,22 @@ export class TodoDataService {
   }
 
   // Simulate DELETE /todos/:id
-  deleteTodoById(id: number): TodoDataService {
+  deleteTodoById(id: number): void {
     let todos = this.getAllTodos();
     todos = todos
-      .filter(todo => todo.id !== id);
+      .filter(todo => todo.id != id);
     this.setLocalStorageTodos(todos);
-    return this;
+    
   }
 
   // Simulate PUT /todos/:id
   updateTodoById(id: number, values: Object = {}): Todo {
     let todo = this.getTodoById(id);
+    
     if (!todo) {
       return null;
     }
+    
     Object.assign(todo, values);
     return todo;
   }
@@ -55,25 +64,24 @@ export class TodoDataService {
 
   // Simulate GET /todos/:id
   getTodoById(id: number): Todo {
-    let todos = this.getAllTodos();
-    return todos
-      .filter(todo => todo.id === id)
-      .pop();
+  return this.todos
+     .filter(todo => todo.id === id)
+     .pop();
+      
   }
 
   // Toggle todo complete
   toggleTodoComplete(todo: Todo){
-    let updatedTodo = this.updateTodoById(todo.id, {
-      complete: !todo.complete
-    });
-    return updatedTodo;
+  let updatedTodo = this.updateTodoById(todo.id, {
+     complete: !todo.complete
+   });
+   return updatedTodo;
   }
   
-  put(data) {
-  let todos = this.getAllTodos();
+put(data) {
   return new Promise(resolve => {
-    let index = todos.findIndex(todo => todo.id === data.id);
-    todos[index].title = data.title;
+    let index = this.todos.findIndex(todo => todo.id === data.id);
+    this.todos[index].title = data.title;
     resolve(data);
   });
 }

@@ -1,11 +1,9 @@
-<div class="view" data-ng-controller="TodoController">
-    <input class="toggle" type="checkbox" (click)="toggleTodoComplete(todo)" [checked]="todo.complete">
+<div class="view">
     
-    <tr>
-        <td><label (dblclick)="todo.editing = true">{{todo.title}}</label></td>
-        <td><label (dblclick)="todo.editing = true">{{todo.date}}</label></td>
-        <td><label onclick="edit(this)">{{todo.time}}</label></td>
-    </tr>
+        <input class="toggle" type="checkbox" (click)="toggleTodoComplete(todo)" [checked]="todo.complete">
+        <label (dblclick)="todo.editing = true">{{todo.title}}</label>
+        <label>{{todo.date}}</label>
+        <label>{{todo.time}}</label>
     <button class="destroy" (click)="removeTodo(todo)"></button>
 </div>
 <input class="edit"
@@ -14,16 +12,3 @@
          (blur)="updateTodo(todo, updatedTodo.value)"
          (keyup.escape)="todo.editing = false"
          (keyup.enter)="updateTodo(todo, updatedTodo.value)">
-
-<script>
-    function TodoController ($scope) {
-	   $scope.saved = localStorage.getItem('todos');
-	   $scope.todos = (localStorage.getItem('todos')!==null) ? JSON.parse($scope.saved) : [ {title: 'Learn AngularJS', checked: false}, {title: 'Build an Angular app', checked: false} ];
-	   localStorage.setItem('todos', JSON.stringify($scope.todos));
-    }
-</script>
-<script>
-    function edit(id) {
-        id.innerHTML. 
-    }
-</script>
